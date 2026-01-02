@@ -1,0 +1,15 @@
+package com.tcs.netbanking.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.tcs.netbanking.bean.TransactionHistory;
+
+@Repository
+public interface TransactionHistoryRepository<Account> extends JpaRepository<TransactionHistory, Integer> {
+	List<TransactionHistory> findByAccount(Account account);
+}
+
+		

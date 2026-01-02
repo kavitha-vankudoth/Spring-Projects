@@ -1,0 +1,54 @@
+package com.tcs.springsecurity.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password4j.BcryptPassword4jPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.tcs.springsecurity.bean.User;
+import com.tcs.springsecurity.service.UserService;
+import ch.qos.logback.core.model.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+@Controller
+public class JspController {
+	
+	@Autowired
+	UserService userService;
+	
+	
+	@RequestMapping("/jsp")
+	public String getJsp() {
+		return "sample";
+	}
+	
+	@RequestMapping("/login")
+	public String getLogin() {
+		return "login";
+	}
+	
+	@RequestMapping("/wel")
+	public String getWel() {
+		return "welcome";
+	}
+	@RequestMapping("/register")
+	public String getRegisterPage(Model model) {
+	    model.addAttribute("user",new User());
+		return "register";
+		
+	}
+	@RequestMapping(value="/register",method=RequestMethod.POST)
+	public String getRegisterData(@ModelAttribute("user")User user,Model model) {
+		BcryptPassword4jPasswordEncoder b=new BcryptPassword4jPasswordEncoder();
+		String encoderPassword=b.encode(user.getPassword());
+		user.setPassword(encoderPassword);
+		userService.save(user);
+		
+		return "welcome";
+	}
+	
+}

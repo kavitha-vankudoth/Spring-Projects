@@ -1,0 +1,70 @@
+package com.tcs.example.basic.bean;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Entity
+@Data
+public class User implements UserDetails {
+	
+	@Id
+	@Column
+	private String username;
+	
+	@Column
+	private String password;
+	
+	@Column
+	private String details;
+	
+	@Column(name="group_perimission")
+	private String groupPermission;
+	
+	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> list=new ArrayList<>();
+		
+		list.add(new SimpleGrantedAuthority("ADMIN"));
+		// TODO Auto-generated method stub
+		return list;
+	}
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public @Nullable String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+}

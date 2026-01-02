@@ -1,0 +1,62 @@
+package com.tcs.netbanking.Controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tcs.netbanking.bean.TransactionHistory;
+import com.tcs.netbanking.service.TransactionHistoryservice;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/api/transactions")
+public class TransactionHistoryController {
+
+    private final TransactionHistoryservice service;
+
+    public TransactionHistoryController(TransactionHistoryservice service) {
+        this.service = service;
+    }
+
+    @PostMapping("/{accNum}")
+    public ResponseEntity<TransactionHistory> create(@PathVariable Integer accNum,
+                                                     @Valid @RequestBody TransactionHistory tx) {
+        return ResponseEntity.ok(service.create(accNum, tx));
+    }
+
+    @GetMapping("/{transactionId}")
+    public ResponseEntity<TransactionHistory> get(@PathVariable String transactionId) throws Throwable {
+        return ResponseEntity.ok(service.get(transactionId));
+    }
+
+    @GetMapping("/account/{accNum}")
+    public ResponseEntity<List<TransactionHistory>> getByAccount(@PathVariable Integer accNum) {
+        return ResponseEntity.ok(service.getByAccount(accNum));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TransactionHistory>> getAll() {
+        return ResponseEntity.ok(service.getAll());
+    }
+
+    @PutMapping("/{transactionId}")
+    public ResponseEntity<TransactionHistory> update(@PathVariable String transactionId,
+                                                     @Valid @RequestBody TransactionHistory updated) throws Throwable {
+        return ResponseEntity.ok(service.update(transactionId, updated));
+    }
+
+    @DeleteMapping("/{transactionId}")
+    public ResponseEntity<Void> delete(@PathVariable String transactionId) throws Throwable {
+        service.delete(transactionId);
+        return ResponseEntity.noContent().build();
+    }
+}

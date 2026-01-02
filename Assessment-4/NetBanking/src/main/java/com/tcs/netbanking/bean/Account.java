@@ -1,0 +1,138 @@
+package com.tcs.netbanking.bean;
+
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
+
+
+@Entity 
+@Table(name = "Account")
+public class Account {
+
+	@Id
+	@Column
+	@Min(value=10000,message="Account number must be >=10000")
+	@Max(value=1000000,message="Account number must be <=1000000")
+	private int accNum;
+	
+	@Column
+	@Size(min=5,max=20,message="Account name must be 5 to 20 characters")
+	private String accName;
+	
+	@Column
+	@Positive(message="balance must be positive")
+	private int balance;
+	
+	@Column
+	@Size(min=10,message="branchId must have 10 characters")
+	private String branchId;
+	
+	@Column(name="area",length=64)
+	private String area;
+	
+	@Column
+	@Email(message="proper email should be there")
+	private String Email;
+	 
+	
+	
+	
+	public Account(
+			@Min(value = 10000, message = "Account number must be >=10000") @Max(value = 1000000, message = "Account number must be <=1000000") int accNum,
+			@Size(min = 5, max = 20, message = "Account name must be 5 to 20 characters") String accName,
+			@Positive(message = "balance must be positive") int balance,
+			@Size(min = 10, message = "branchId must have 10 characters") String branchId, String area,
+			@jakarta.validation.constraints.Email(message = "proper email should be there") String email,
+			List<TransactionHistory> transactions) {
+		super();
+		this.accNum = accNum;
+		this.accName = accName;
+		this.balance = balance;
+		this.branchId = branchId;
+		this.area = area;
+		Email = email;
+		this.transactions = transactions;
+	}
+
+	@OneToMany(mappedBy="account")
+	private List<TransactionHistory> transactions;
+
+
+	public List<TransactionHistory> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<TransactionHistory> transactions) {
+		this.transactions = transactions;
+	}
+
+	public int getAccNum() {
+		return accNum;
+	}
+
+	public void setAccNum(int accNum) {
+		this.accNum = accNum;
+	}
+
+	public String getAccName() {
+		return accName;
+	}
+
+	public void setAccName(String accName) {
+		this.accName = accName;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public String getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(String branchId) {
+		this.branchId = branchId;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String email) {
+		Email = email;
+	}
+
+	public Account() {
+		super();
+	}
+	
+	
+	
+}
+	
+	
+	
+
+

@@ -1,0 +1,5 @@
+package com.tcs.example.configuration;
+
+public class Config {
+
+}

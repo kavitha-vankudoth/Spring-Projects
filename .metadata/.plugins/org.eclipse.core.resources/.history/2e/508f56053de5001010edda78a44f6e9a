@@ -1,0 +1,102 @@
+package com.tcs.netbanking.bean;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import lombok.Data;
+
+@Data
+public class Account {
+	
+	@Min(value=10000,message="Account number must be >=10000")
+	@Max(value=1000000,message="Account number must be <=1000000")
+	private int accNum;
+	
+	@Size(min=5,max=20,message="Account name must be 5 to 20 characters")
+	private String accName;
+	
+	@Positive(message="balance must be positive")
+	private int balance;
+	
+	@Size(min=10,message="branchId must have 10 characters")
+	private String branchId;
+	private String area;
+	
+	@Email(message="proper email should be there")
+	private String Email;
+	
+	
+	@OneToMany
+	private List<TransactionHistory>transactions;
+
+	public Account(
+			@Min(value = 10000, message = "Account number must be >=10000") @Max(value = 1000000, message = "Account number must be <=1000000") int accNum,
+			@Size(min = 5, max = 20, message = "Account name must be 5 to 20 characters") String accName,
+			@Positive(message = "balance must be positive") int balance,
+			@Size(min = 10, message = "branchId must have 10 characters") String branchId, String area,
+			@jakarta.validation.constraints.Email(message = "proper email should be there") String email) {
+		super();
+		this.accNum = accNum;
+		this.accName = accName;
+		this.balance = balance;
+		this.branchId = branchId;
+		this.area = area;
+		Email = email;
+	}
+
+	public int getAccNum() {
+		return accNum;
+	}
+
+	public void setAccNum(int accNum) {
+		this.accNum = accNum;
+	}
+
+	public String getAccName() {
+		return accName;
+	}
+
+	public void setAccName(String accName) {
+		this.accName = accName;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public String getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(String branchId) {
+		this.branchId = branchId;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String email) {
+		Email = email;
+	}
+	
+}
+	
+	
+	
+
+

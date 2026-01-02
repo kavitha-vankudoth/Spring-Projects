@@ -1,0 +1,13 @@
+package com.tcs.Springsecurity.basic.repo;
+
+import org.springframework.security.core.userdetails.User;
+
+public interface UserRepository {
+
+	static User findByusername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

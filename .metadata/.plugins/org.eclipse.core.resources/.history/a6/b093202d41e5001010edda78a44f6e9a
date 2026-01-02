@@ -1,0 +1,14 @@
+package com.tcs.netbanking.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tcs.netbanking.bean.Account;
+
+public interface AccountRepository extends JpaRepository<Account, Integer> {
+	List<Account> findByBranchId(String branchId);
+
+}
+
+

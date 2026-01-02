@@ -1,0 +1,5 @@
+package com.tcs.example.basic.bean;
+
+public class User {
+
+}

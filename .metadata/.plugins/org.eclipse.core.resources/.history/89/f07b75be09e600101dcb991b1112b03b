@@ -1,0 +1,21 @@
+package com.tcs.Springsecurity.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class JspController {
+	
+	@RequestMapping("/wel")
+	public String getWelcome() {
+		return "welcome";
+	}
+	@RequestMapping("/log")
+	public String getLogin() {
+		return "login";
+	}
+	@RequestMapping("/sam")
+	public String getsample() {
+		return "Sample";
+	}
+}

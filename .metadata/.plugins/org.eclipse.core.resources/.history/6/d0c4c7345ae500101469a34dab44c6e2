@@ -1,0 +1,56 @@
+package com.tcs.netbanking.bean;
+
+	import jakarta.persistence.*;
+	import jakarta.validation.constraints.NotNull;
+	import jakarta.validation.constraints.Positive;
+	import java.time.LocalDateTime;
+
+	@Entity
+	@Table(name = "transactionhistory")
+	public class TransactionHistory {
+
+	    @Id
+	    private int transactionId;
+
+	    @ManyToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "account_id")
+	    private Account account;
+
+	    @NotNull
+	    @Positive(message = "amount must be positive")
+	    private int amount;
+
+	    @Column(name = "date")
+	    private LocalDateTime date;
+	    
+	    
+	    public int getTransactionId() {
+	        return transactionId;
+	    }
+
+	    public Account getAccount() {
+	        return account;
+	    }
+
+	    public void setAccount(Account account) {
+	        this.account = account;
+	    }
+
+	    public int getAmount() {
+	        return amount;
+	    }
+
+	    public void setAmount(int amount) {
+	        this.amount = amount;
+	    }
+
+	    public LocalDateTime getDate() {
+	        return date;
+	    }
+
+	    public void setDate(LocalDateTime date) {
+	        this.date = date;
+	    }
+	}
+
+

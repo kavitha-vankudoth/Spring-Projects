@@ -1,0 +1,8 @@
+package com.tcs.sample.Threads;
+
+public class DeadLock {
+	public static void main(String[] args) {
+		
+	}
+
+}

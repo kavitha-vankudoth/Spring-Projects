@@ -1,0 +1,45 @@
+package com.tcs.netbanking.Controller;
+
+@RestController
+@RequestMapping("/api/transactions")
+public class TransactionHistoryController {
+
+    private final TransactionHistoryService service;
+
+    public TransactionHistoryController(TransactionHistoryService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/{accNum}")
+    public ResponseEntity<TransactionHistory> create(@PathVariable Integer accNum,
+                                                     @Valid @RequestBody TransactionHistory tx) {
+        return ResponseEntity.ok(service.create(accNum, tx));
+    }
+
+    @GetMapping("/{transactionId}")
+    public ResponseEntity<TransactionHistory> get(@PathVariable Long transactionId) {
+        return ResponseEntity.ok(service.get(transactionId));
+    }
+
+    @GetMapping("/account/{accNum}")
+    public ResponseEntity<List<TransactionHistory>> getByAccount(@PathVariable Integer accNum) {
+        return ResponseEntity.ok(service.getByAccount(accNum));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TransactionHistory>> getAll() {
+        return ResponseEntity.ok(service.getAll());
+    }
+
+    @PutMapping("/{transactionId}")
+    public ResponseEntity<TransactionHistory> update(@PathVariable Long transactionId,
+                                                     @Valid @RequestBody TransactionHistory updated) {
+        return ResponseEntity.ok(service.update(transactionId, updated));
+    }
+
+    @DeleteMapping("/{transactionId}")
+    public ResponseEntity<Void> delete(@PathVariable Long transactionId) {
+        service.delete(transactionId);
+        return ResponseEntity.noContent().build();
+    }
+}

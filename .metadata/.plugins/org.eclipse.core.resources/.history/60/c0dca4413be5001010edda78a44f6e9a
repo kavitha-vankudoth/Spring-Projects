@@ -1,0 +1,22 @@
+package com.tcs.netbanking.bean;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import lombok.Data;
+
+@Data
+public class Account {
+	
+	@Min(value=10000,message="Account number must be >=10000")
+	@Max(value=1000000,message="Account number must be <=1000000")
+	private int accNum;
+	private String accName;
+	private int balance;
+	private String branchId;
+	private String area;
+	private String Email;
+	
+	
+	
+
+}

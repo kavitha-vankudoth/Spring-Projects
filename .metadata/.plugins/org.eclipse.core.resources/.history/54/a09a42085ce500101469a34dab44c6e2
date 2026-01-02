@@ -1,0 +1,53 @@
+package com.tcs.netbanking.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.tcs.netbanking.bean.Account;
+import com.tcs.netbanking.repository.AccountRepository;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class Accountservice {
+
+    private final AccountRepository repo;
+
+    public Accountservice(AccountRepository repo) {
+        this.repo = repo;
+    }
+
+    public Account create(Account account) {
+        return repo.save(account);
+    }
+
+    public Account get(Integer accNum) {
+        return repo.findById(accNum)
+                .orElseThrow();
+    }
+
+    public List<Account> getByBranchId(String branchId) {
+        return repo.findByBranchId(branchId);
+    }
+
+    public List<Account> getAll() {
+        return repo.findAll();
+    }
+
+    public Account update(Integer accNum, Account updated) {
+        Account existing = get(accNum);
+        existing.setAccName(updated.getAccName());
+        existing.setBalance(updated.getBalance());
+        existing.setBranchId(updated.getBranchId());
+        existing.setArea(updated.getArea());
+        existing.setEmail(updated.getEmail());
+        return repo.save(existing);
+    }
+
+    public void delete(Integer accNum) {
+        Account existing = get(accNum);
+        repo.delete(existing);
+    }
+}

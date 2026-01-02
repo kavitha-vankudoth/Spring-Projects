@@ -1,0 +1,61 @@
+package com.tcs.netbanking.Controller;
+
+import java.util.List;
+
+import org.jspecify.annotations.Nullable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tcs.netbanking.bean.Account;
+import com.tcs.netbanking.service.Accountservice;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/api/accounts")
+public class AccountController {
+
+    private final Accountservice service;
+
+    public AccountController(Accountservice service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public ResponseEntity<Account> create(@Valid @RequestBody Account account) {
+        return ResponseEntity.ok(service.create(account));
+    }
+
+    @GetMapping("/{accNum}")
+    public ResponseEntity<@Nullable Object> get(@PathVariable Integer accNum) {
+        return ResponseEntity.ok(service.get(accNum));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Account>> getAll() {
+        return ResponseEntity.ok(service.getAll());
+    }
+
+    @GetMapping("/branch/{branchId}")
+    public ResponseEntity<List<Account>> getByBranchId(@PathVariable String branchId) {
+        return ResponseEntity.ok(service.getByBranchId(branchId));
+    }
+
+    @PutMapping("/{accNum}")
+    public ResponseEntity<@Nullable Object> update(@PathVariable Integer accNum, @Valid @RequestBody Account updated) {
+        return ResponseEntity.ok(service.update(accNum, updated));
+    }
+
+    @DeleteMapping("/{accNum}")
+    public ResponseEntity<Void> delete(@PathVariable Integer accNum) {
+        service.delete(accNum);
+        return ResponseEntity.noContent().build();
+    }
+}

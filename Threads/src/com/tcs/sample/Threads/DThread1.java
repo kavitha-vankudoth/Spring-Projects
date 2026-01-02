@@ -1,0 +1,21 @@
+package com.tcs.sample.Threads;
+
+public class DThread1 extends Thread{
+	//change the order..check the result
+	public void run() {
+		synchronized (Util.s1) {
+			System.out.println("s1 is locked");
+			synchronized (Util.s2) {
+				System.out.println("s2 is locked");
+				synchronized (Util.s3) {
+					System.out.println("s3 is locked");
+				}
+				System.out.println("s3 is realised");
+			}
+			System.out.println("s2 is realised");
+		}
+		System.out.println("s1 is realised");
+		}
+	}
+
+

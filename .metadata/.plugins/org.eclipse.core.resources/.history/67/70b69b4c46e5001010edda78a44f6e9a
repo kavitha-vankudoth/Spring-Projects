@@ -1,0 +1,28 @@
+package com.tcs.netbanking.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.tcs.netbanking.bean.Account;
+import com.tcs.netbanking.repository.AccountRepository;
+
+@Service
+public class Accountservice {
+	private final AccountRepository repo;
+
+	public Accountservice(AccountRepository repo) { this.repo = repo; }
+
+	public Account create(Account account) {
+		return repo.save(account);
+	}
+
+	public List<Account> getByBranchId(String branchId) {
+		return repo.findByBranchId(branchId);
+	}
+
+	public List<Account> getAll() {
+		return repo.findAll();
+	}
+
+}

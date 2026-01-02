@@ -1,0 +1,13 @@
+package com.tcs.sample.Threads;
+
+public class MyThread implements Runnable{
+	private String msg;
+	public MyThread(String msg) {
+		this.msg=msg;
+	}
+	
+	public void run() {
+		System.out.println("Thread is running");
+	}
+
+}

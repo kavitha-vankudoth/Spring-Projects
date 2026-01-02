@@ -1,0 +1,13 @@
+package com.tcs.sample.Threads;
+
+public class DeadLock {
+	public static void main(String[] args) {
+		DThread1 t1 = new DThread1();
+		DThread1 t2 = new DThread1();
+
+		t1.start();
+		t2.start();
+
+	}
+
+}

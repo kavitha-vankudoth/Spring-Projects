@@ -1,0 +1,25 @@
+package com.tcs.sample.Threads;
+
+public class SampleThread extends Thread{
+	private String msg;
+	public SampleThread(String msg) {
+		this.msg=msg;
+	}
+	public void run() {
+		for (int i=0;i<=10;i++) {
+			System.out.println(msg);
+			try {
+				Thread.sleep(300);
+			}catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+      public static void main(String[] args) {
+    	  long ms=System.currentTimeMillis();
+    	  m1("hello");
+    	  m1("bye");
+    	  long es=System.currentTimeMillis();
+    	  System.out.println((es-ms));
+      }
+}

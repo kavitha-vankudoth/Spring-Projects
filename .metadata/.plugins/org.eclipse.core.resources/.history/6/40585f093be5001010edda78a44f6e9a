@@ -1,0 +1,17 @@
+package com.tcs.netbanking.bean;
+
+import lombok.Data;
+
+@Data
+public class Account {
+	private int accNum;
+	private String accName;
+	private int balance;
+	private String branchId;
+	private String area;
+	private String Email;
+	
+	
+	
+
+}

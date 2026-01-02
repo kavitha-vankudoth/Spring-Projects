@@ -1,0 +1,60 @@
+package com.tcs.netbanking.service;
+
+import java.util.List;
+
+import org.hibernate.ResourceClosedException;
+import org.springframework.stereotype.Service;
+
+import com.tcs.netbanking.bean.Account;
+import com.tcs.netbanking.bean.TransactionHistory;
+import com.tcs.netbanking.repository.AccountRepository;
+import com.tcs.netbanking.repository.TransactionHistoryRepository;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class TransactionHistoryservice {
+
+    private final TransactionHistoryRepository repo;
+    private final AccountRepository accountRepo;
+
+    public TransactionHistoryservice(TransactionHistoryRepository repo, AccountRepository accountRepo) {
+        this.repo = repo;
+        this.accountRepo = accountRepo;
+    }
+
+    public TransactionHistory create(Integer accNum, TransactionHistory tx) {
+        Account account = accountRepo.findById(accNum)
+                .orElseThrow();
+        tx.setAccount(account);
+        return (TransactionHistory) repo.save(tx);
+    }
+
+    public TransactionHistory get(String transactionId) {
+        return (TransactionHistory) repo.findById(transactionId)
+                .orElseThrow(() -> new ResourceClosedException("Transaction not found: " + transactionId));
+    }
+
+    public List<TransactionHistory> getByAccount(Integer accNum) {
+        Account account = accountRepo.findById(accNum)
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found: " + accNum));
+        return repo.findByAccount(account);
+    }
+
+    public List<TransactionHistory> getAll() {
+        return repo.findAll();
+    }
+
+    public TransactionHistory update(Long transactionId, TransactionHistory updated) {
+        TransactionHistory existing = get(transactionId);
+        existing.setAmount(updated.getAmount());
+        existing.setDate(updated.getDate());
+        return repo.save(existing);
+    }
+
+    public void delete(Long transactionId) {
+        TransactionHistory existing = get(transactionId);
+        repo.delete(existing);
+    }
+}

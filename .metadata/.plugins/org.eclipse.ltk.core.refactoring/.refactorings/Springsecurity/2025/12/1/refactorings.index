@@ -1,0 +1,15 @@
+1766990220746	Rename package 'com.example.demo'
+1766998973748	Delete element
+1766998979317	Delete element
+1766999069432	Rename type 'UserService'
+1766999094554	Rename package 'com.tcs.example.configuration'
+1767073243905	Copy compilation unit
+1767073250565	Delete element
+1767087350559	Delete element
+1767087383153	Delete element
+1767159081604	Rename package 'com.tcs.example.basic.bean'
+1767164866121	Move compilation unit
+1767164879423	Delete element
+1767164892851	Rename package 'com.tcs.Springsecurity.basic.controller'
+1767164903502	Rename package 'com.tcs.Springsecuriy.basic.bean'
+1767164914105	Rename package 'com.tcs.Springsecurity.basic.repo'

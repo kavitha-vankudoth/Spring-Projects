@@ -1,0 +1,6 @@
+package com.tcs.Springsecurity.basic.repo;
+
+public interface UserRepository {
+	
+
+}
